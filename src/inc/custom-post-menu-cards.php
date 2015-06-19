@@ -115,7 +115,7 @@ class Menu_Card_MenuCards_Custom_Post
       /* (array/boolean) (optional) An alias for calling add_post_type_support() directly. 
          As of 3.5, boolean false can be passed as value instead of an array to prevent default (title and editor) behaviour.
          Default: title and editor */
-      'supports' => array('title', 'thumbnail')
+      'supports' => array('title', 'editor', 'thumbnail')
     );
 
     //Register Post type
