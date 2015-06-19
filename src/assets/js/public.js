@@ -12,5 +12,7 @@
 	"use strict";
 	$(function () {
 		// Place your public-facing JavaScript here
+        var $body = $('body');
+        $body.find('#menu-card').text('Yes Yes!')
 	});
 }(jQuery));

@@ -96,7 +96,8 @@ class Menu_Card_Info {
       
       // Load admin only when required
       add_action( 'admin_menu', array('Menu_Card_Info','handle_admin_menu') );
-      
+      add_shortcode( 'menucard', array('Menu_Card_Info','handle_menucard_shortcode') );
+
     }
     
     
@@ -106,6 +107,14 @@ class Menu_Card_Info {
       $admin->handle_admin_menu();
     }
     
+    public static function handle_menucard_shortcode($atts) {
+        $a = shortcode_atts( array(
+            'category' => ''
+        ), $atts );
+
+        return "<div id='menu-card' data-category='".$a['category']."'></div>";
+    }
+
 
 }
 
