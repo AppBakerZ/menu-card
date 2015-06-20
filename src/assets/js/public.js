@@ -17,7 +17,7 @@
             category = $container.data('category');
 
         var data = {
-            'action': 'my_action',
+            'action': 'get_posts_by_category',
             'category': category.split(',')
         };
 

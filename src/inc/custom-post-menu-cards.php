@@ -36,6 +36,8 @@ class Menu_Card_MenuCards_Custom_Post
 
     //Add hook for admin admin style sheet and javascript.
     add_action('admin_enqueue_scripts', array($this, 'handle_admin_enqueue_scripts'));
+    add_action( 'wp_ajax_get_posts_by_category', array($this, 'get_posts_by_category_callback'));
+    add_action( 'wp_ajax_nopriv_get_posts_by_category', array($this, 'get_posts_by_category_callback'));
 
   }
 
@@ -283,10 +285,19 @@ class Menu_Card_MenuCards_Custom_Post
    **/
   public function render_details_metabox() {
     $this->render_input_field('price', __('Price', 'menu-card'));
-
   }
 
-
+    public function get_posts_by_category_callback() {
+        $category = $_POST['category'];
+        $args = array(
+            'posts_per_page'   => -1,
+            'category_name'    => implode(',', $category),
+            'post_type'        => $this->post_type,
+            'post_status'      => 'publish'
+        );
+        $posts_array = get_posts( $args );
+        wp_send_json($posts_array);
+    }
 
 }
 
