@@ -96,6 +96,10 @@ class Menu_Card_Info {
       
       // Load admin only when required
       add_action( 'admin_menu', array('Menu_Card_Info','handle_admin_menu') );
+
+      add_action( 'wp_ajax_my_action', array('Menu_Card_Info','my_action_callback') );
+      add_action( 'wp_ajax_nopriv_my_action', 'my_action_callback' );
+
       add_shortcode( 'menucard', array('Menu_Card_Info','handle_menucard_shortcode') );
 
     }
@@ -115,6 +119,22 @@ class Menu_Card_Info {
         return "<div id='menu-card' data-category='".$a['category']."'></div>";
     }
 
+
+    public static function my_action_callback() {
+
+        $category = $_POST['category'];
+
+        $args = array(
+            'posts_per_page'   => -1,
+            'category_name'    => implode(',', $category),
+            'post_type'        => 'menu-cards',
+            'post_status'      => 'publish'
+        );
+
+        $posts_array = get_posts( $args );
+
+        wp_send_json($posts_array);
+    }
 
 }
 

@@ -152,7 +152,10 @@ class Menu_Card {
    * @since    0.1.0
    */
   public function enqueue_scripts() {
-    wp_enqueue_script(Menu_Card_Info::slug . '-plugin-script');
+      wp_enqueue_script(Menu_Card_Info::slug . '-plugin-script');
+      // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
+      wp_localize_script( Menu_Card_Info::slug . '-plugin-script', 'ajax_object',
+          array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );
   }
 
 }

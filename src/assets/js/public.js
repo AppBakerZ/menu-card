@@ -12,7 +12,20 @@
 	"use strict";
 	$(function () {
 		// Place your public-facing JavaScript here
-        var $body = $('body');
-        $body.find('#menu-card').text('Yes Yes!')
+        var $body = $('body'),
+            $container = $body.find('#menu-card'),
+            category = $container.data('category');
+
+        var data = {
+            'action': 'my_action',
+            'category': category.split(',')
+        };
+
+        // We can also pass the url value separately from ajaxurl for front end AJAX implementations
+        jQuery.post(ajax_object.ajax_url, data, function(response) {
+            console.log(response)
+        });
+
+
 	});
 }(jQuery));
