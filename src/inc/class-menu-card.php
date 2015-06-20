@@ -128,7 +128,7 @@ class Menu_Card {
   private function register_script_and_style() {
     wp_register_script( Menu_Card_Info::slug . '-plugin-script',
                         Menu_Card_Info::$plugin_url . '/assets/js/public.js',
-                        array( 'jquery' ),
+                        array( 'jquery', 'underscore' ),
                         Menu_Card_Info::version );
 
     wp_register_style( Menu_Card_Info::slug . '-plugin-style',
@@ -155,7 +155,11 @@ class Menu_Card {
       wp_enqueue_script(Menu_Card_Info::slug . '-plugin-script');
       // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
       wp_localize_script( Menu_Card_Info::slug . '-plugin-script', 'ajax_object',
-          array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );
+          array(
+              'ajax_url' => admin_url( 'admin-ajax.php' ),
+              'template_url' => Menu_Card_Info::$plugin_url . '/assets/templates/menu-card.html',
+              'we_value' => 1234
+          ) );
   }
 
 }
