@@ -291,7 +291,13 @@ class Menu_Card_MenuCards_Custom_Post
         $category = $_POST['category'];
         $args = array(
             'posts_per_page'   => -1,
-            'category_name'    => implode(',', $category),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'Menu Card Category',
+                    'field'    => 'slug',
+                    'terms'    => implode(',', $category),
+                ),
+            ),
             'post_type'        => $this->post_type,
             'post_status'      => 'publish'
         );
