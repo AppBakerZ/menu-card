@@ -7,3 +7,78 @@
  * @link      https://wordpress.org/plugins/menu-card/
  */
 
+#menu-card{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+.card_menu_list,
+.card_menu_list li,
+.menu_card_content_wrapper
+{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    position: relative;
+    list-style: none;
+}
+.card_menu_list li{margin: 40px 0 0 0;}
+.menu_card_thumbnail
+{
+    margin: 0 20px 0 0;
+    padding: 0;
+    float: left;
+    width: 20%;
+    height: 100px;
+}
+.menu_card_thumbnail img
+{
+    margin: 0;
+    padding:2px;
+    float: left;
+    width: 100px;
+    height: auto;
+    border: 1px solid #dddddd;
+}
+.menu_card_content,
+.menu_card_content_full-width
+{
+    margin: 0;
+    padding: 0;
+    float: right;
+    width: 75%;
+    position: relative;
+}
+.menu_card_content_full-width{width: 100%;}
+.title_price_box
+{
+    margin: 0 0 20px 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    line-height: 12px;
+    position: relative;
+    /*border-bottom: 1px dotted #ccc;*/
+    background: url("../price-line.png") 0 bottom repeat-x;
+}
+.menu_card_title
+{
+    margin: 0 20px 0 0;
+    padding: 0 15px 0 0;
+    float: left;
+    background: #fff;
+    position: relative;
+    font-style: italic;
+}
+.menu_card_price
+{
+    margin: 0 0 0 0;
+    padding: 0 0 0 15px;
+    float: right;
+    position: relative;
+    background: #fff;
+}
