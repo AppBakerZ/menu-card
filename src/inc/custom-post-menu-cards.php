@@ -290,27 +290,42 @@ class Menu_Card_MenuCards_Custom_Post
 
     public function get_posts_by_category_callback() {
         $category = $_POST['category'];
-        $args = array(
-            'posts_per_page'   => -1,
-            'post_type'        => $this->post_type,
-            'post_status'      => 'publish'
+        wp_send_json($this->list_posts_by_term($this->post_type, $this->texonomy, $category));
+    }
+
+    /**
+     * Get posts and group by taxonomy terms.
+     * @param string $posts Post type to get.
+     * @param string $terms Taxonomy to group by.
+     * @param array $filter_terms Taxonomy to group by.
+     * @param integer $count How many post to show per taxonomy term.
+     * @return object $grouped_posts
+     */
+    public function list_posts_by_term( $posts, $terms, $filter_terms, $count = -1 ) {
+        $grouped_posts = [];
+        $filter = array(
+            'orderby' => 'name'
         );
-        if(!count($category)){
-            $args['tax_query'] = array(
-                array(
-                    'taxonomy' => $this->texonomy,
-                    'field'    => 'slug',
-                    'terms'    => implode(',', $category),
-                ),
+        if($filter_terms){
+            $filter['slug'] = $filter_terms;
+        }
+        $tax_terms = get_terms( $terms, $filter );
+        foreach ( $tax_terms as $term ) {
+            $grouped_posts[$term->name] = [];
+
+            $args = array(
+                'posts_per_page' => $count,
+                $terms => $term->slug,
+                'post_type' => $posts,
             );
+            $tax_terms_posts = get_posts( $args );
+            foreach ( $tax_terms_posts as $post ) {
+                $post->post_meta = get_post_meta($post->ID, $this->prefix);
+                $post->post_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+                $grouped_posts[$term->name][] = $post;
+            }
         }
-        $posts = get_posts( $args );
-        foreach($posts as $post){
-            $post->post_meta = get_post_meta($post->ID, $this->prefix);
-            $post->post_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-            $post->category = $term_list = wp_get_post_terms($post->ID, $this->texonomy, array('fields' => 'names'));
-        }
-        wp_send_json($posts);
+        return $grouped_posts;
     }
 
 }
