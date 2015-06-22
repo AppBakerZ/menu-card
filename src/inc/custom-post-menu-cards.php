@@ -21,6 +21,7 @@ class Menu_Card_MenuCards_Custom_Post
     public function Menu_Card_MenuCards_Custom_Post() {
         parent::__construct();
         $this->post_type = 'menu-cards';
+        $this->texonomy = 'Menu Card Category';
         $this->prefix = Menu_Card_Info::slug . "-" . $this->post_type;
 
         // constructor must be called from init
@@ -155,7 +156,7 @@ class Menu_Card_MenuCards_Custom_Post
         );
 
         //Register Taxonomy
-        register_taxonomy('Menu Card Category', array( $this->post_type ), $args);
+        register_taxonomy($this->texonomy, array( $this->post_type ), $args);
     }
 
 
@@ -297,7 +298,7 @@ class Menu_Card_MenuCards_Custom_Post
         if(!count($category)){
             $args['tax_query'] = array(
                 array(
-                    'taxonomy' => 'Menu Card Category',
+                    'taxonomy' => $this->texonomy,
                     'field'    => 'slug',
                     'terms'    => implode(',', $category),
                 ),
@@ -307,6 +308,7 @@ class Menu_Card_MenuCards_Custom_Post
         foreach($posts as $post){
             $post->post_meta = get_post_meta($post->ID, $this->prefix);
             $post->post_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+            $post->category = $term_list = wp_get_post_terms($post->ID, $this->texonomy, array('fields' => 'names'));
         }
         wp_send_json($posts);
     }

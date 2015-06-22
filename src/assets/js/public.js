@@ -16,9 +16,13 @@
             $container = $body.find('#menu-card'),
             category = $container.data('category');
 
+        // Terminate if element is not exist
+        if(!$container.length)
+            return;
+
         var data = {
             'action': 'get_posts_by_category',
-            'category': category.split(',')
+            'category': category && category.split(',')
         };
 
         var getTemplate = jQuery.get(ajax_object.template_url),
