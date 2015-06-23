@@ -85,6 +85,7 @@
 }
 .card_menu_list li .menu_category_name {display: none;}
 .card_menu_list li:first-child .menu_category_name {display: block;}
+
 .menu_category_name {
     margin: 0 0 50px 0;
     padding: 0;
