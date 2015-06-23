@@ -74,6 +74,7 @@
     position: relative;
     font-style: italic;
 }
+.menu_card_title a{text-decoration: none; border: none;}
 .menu_card_price
 {
     margin: 0 0 0 0;
@@ -81,4 +82,24 @@
     float: right;
     position: relative;
     background: #fff;
+}
+.card_menu_list li .menu_category_name {display: none;}
+.card_menu_list li:first-child .menu_category_name {display: block;}
+.menu_category_name {
+    margin: 0 0 50px 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    line-height: 14px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+.menu_category_name span {
+    margin: 0;
+    padding: 0 15px 0 0;
+    float: left;
+    background-color: #fff;
+    position: relative;
+    top: 5px;
+    font-style: italic;
 }
