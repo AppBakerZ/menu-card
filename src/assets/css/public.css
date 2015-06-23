@@ -32,8 +32,8 @@
     margin: 0 20px 0 0;
     padding: 0;
     float: left;
-    width: 20%;
-    height: 100px;
+    /*width: 20%;*/
+    /*height: 100px;*/
 }
 .menu_card_thumbnail img
 {
@@ -50,6 +50,7 @@
     margin: 0;
     padding: 0;
     float: right;
+    /*float: left;*/
     width: 75%;
     position: relative;
 }
@@ -75,6 +76,13 @@
     font-style: italic;
 }
 .menu_card_title a{text-decoration: none; border: none;}
+.menu_card_title a h2
+{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: inherit;
+}
 .menu_card_price
 {
     margin: 0 0 0 0;
@@ -95,7 +103,7 @@
     position: relative;
     border-bottom: 1px solid #ddd;
 }
-.menu_category_name span {
+.menu_category_name h1 {
     margin: 0;
     padding: 0 15px 0 0;
     float: left;
