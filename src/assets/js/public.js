@@ -31,7 +31,7 @@
         $.when(getTemplate, getPosts).done(function(template, posts){
             // the code here will be executed when all 2 ajax requests resolve.
             // status, and jqXHR object for each of the 2 ajax calls respectively.
-            var result = _.template(template[0], {menus: posts[0]});
+            var result = _.template(template[0], {categories: posts[0]});
             $container.append(result);
 
             console.log(posts[0])
