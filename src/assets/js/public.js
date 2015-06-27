@@ -56,54 +56,105 @@
             ///////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////
 
+            //get menu card's column wrapper,
+            //set first page on front screen
             var $columnWrapper = $('#column_wrapper'),
                 pageHeight = $columnWrapper.children('div').children('div').siblings('.page_number_0').innerHeight();
 
+            //set menu card's column wrapper height as long as menu card's page height,
+            //add active class on visible page.
             $columnWrapper.css('height', pageHeight);
             $columnWrapper.children('div').children('div').siblings('.page_number_0').addClass("active_menu").show();
 
+            //add condition on previous arrow .
             if(!$columnWrapper.children('div').children('div').siblings('.page_number_0').prev('.menu_card_page').length){
                 $('.nav_previous').hide();
             }
 
+            //set menu card's page width as long as menu card's column wrapper width,
             $('.menu_card_page').css('width', $columnWrapper.innerWidth());
             $columnWrapper.css('height', $('.page_number_0').innerHeight());
 
+            // store browser window width in variable.
             var storeFirstWindowSize = $(window).width();
             var waitToFinishResize;
 
+            //declare a resize function.
             $(window).resize(function() {
                 clearTimeout(waitToFinishResize);
                 waitToFinishResize = setTimeout(doneResizing, 500);
             });
 
+            // when resize is done then this function is going to run.
             function doneResizing(){
 
                 $('.menu_card_page').css('width', $columnWrapper.innerWidth());
-                if($(window).width() < storeFirstWindowSize){
-                    var currentIndex = $('.active_menu').index();
-                    var getSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
 
-                    $('.active_menu').prev('.menu_card_page').css({
-                        '-webkit-transform' : 'translate( '+ getSlideWidth +' , 0 )',
-                        '-moz-transform' : 'translate( '+ getSlideWidth +' , 0 )',
-                        '-o-transform' : 'translate( '+ getSlideWidth +' , 0 )',
-                        '-ms-transform' : 'translate( '+ getSlideWidth +' , 0 )'
+                if( storeFirstWindowSize < $(window).width() ){
+                    var currentIndex = $('.active_menu').index();
+                    var getCurrentSlideWidth = ($columnWrapper.innerWidth() * currentIndex) + 'px';
+                    var getPrevSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
+
+                    $('.active_menu').css({
+                        '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                        '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                        '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                        '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
                     });
 
-                }else if($(window).width() > storeFirstWindowSize){
-                    var currentIndex = $('.active_menu').index();
-                    var getSlideWidth = ($columnWrapper.innerWidth() * currentIndex) + 'px';
+                    if($('.active_menu').prev('.menu_card_page').length){
+                        $('.active_menu').prev('.menu_card_page').css({
+                            '-webkit-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
+                            '-moz-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
+                            '-o-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
+                            '-ms-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )'
+                        });
+                    }
 
-                    $('.active_menu').prev('.menu_card_page').css({
-                        '-webkit-transform' : 'translate( '+ getSlideWidth +' , 0 )',
-                        '-moz-transform' : 'translate( '+ getSlideWidth +' , 0 )',
-                        '-o-transform' : 'translate( '+ getSlideWidth +' , 0 )',
-                        '-ms-transform' : 'translate( '+ getSlideWidth +' , 0 )'
+                    if($('.active_menu').next('.menu_card_page').length){
+                        $('.active_menu').next('.menu_card_page').css({
+                            '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                            '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                            '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                            '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
+                        });
+                    }
+
+
+                }else if( storeFirstWindowSize > $(window).width()){
+                    var currentIndex = $('.active_menu').index();
+                    var getCurrentSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
+                    var getPrevSlideWidth = ($columnWrapper.innerWidth() * currentIndex) + 'px';
+
+                    $('.active_menu').css({
+                        '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                        '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                        '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                        '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
                     });
+
+                    if($('.active_menu').next('.menu_card_page').length) {
+                        $('.active_menu').next('.menu_card_page').css({
+                            '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                            '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                            '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
+                            '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
+                        });
+                    }
+
+                    if($('.active_menu').prev('.menu_card_page').length) {
+                        $('.active_menu').prev('.menu_card_page').css({
+                            '-webkit-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
+                            '-moz-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
+                            '-o-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
+                            '-ms-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )'
+                        });
+                    }
+
 
                 }
 
+                // add condition that on mobile menu card's should be 100% width
                 if($(window).width() < 640)
                 {
                     $('.two_column').css('width', '100%');
@@ -117,6 +168,7 @@
 
         ////////////////////////////////////////////////////////////
 
+        // declare a function when previous arrow hit.
         $body.on('click', '.nav_previous', function(){
 
             var $columnWrapper = $('#column_wrapper');
@@ -125,13 +177,13 @@
 
                 var prevSlideIndex = $('.active_menu').prev('.menu_card_page').index();
                 var getSlideWidth = ($columnWrapper.innerWidth() * prevSlideIndex) + 'px';
-                var getPrevSlid = - ($columnWrapper.innerWidth() * prevSlideIndex) + 'px';
+                var getPrevSlide = - ($columnWrapper.innerWidth() * prevSlideIndex) + 'px';
 
                 $('.active_menu').prev('.menu_card_page').css({
-                    '-webkit-transform' : 'translate( '+ getPrevSlid +' , 0 )',
-                    '-moz-transform' : 'translate( '+ getPrevSlid +' , 0 )',
-                    '-o-transform' : 'translate( '+ getPrevSlid +' , 0 )',
-                    '-ms-transform' : 'translate( '+ getPrevSlid +' , 0 )'
+                    '-webkit-transform' : 'translate( '+ getPrevSlide +' , 0 )',
+                    '-moz-transform' : 'translate( '+ getPrevSlide +' , 0 )',
+                    '-o-transform' : 'translate( '+ getPrevSlide +' , 0 )',
+                    '-ms-transform' : 'translate( '+ getPrevSlide +' , 0 )'
                 });
 
                 $('.active_menu').css({
@@ -156,6 +208,7 @@
 
         ////////////////////////////////////////////////////////////
 
+        // declare a function when next arrow hit.
         $body.on('click', '.nav_next', function(){
 
             var $columnWrapper = $('#column_wrapper');
