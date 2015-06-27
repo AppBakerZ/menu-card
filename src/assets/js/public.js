@@ -59,7 +59,7 @@
             //get menu card's column wrapper,
             //set first page on front screen
             var $columnWrapper = $('#column_wrapper'),
-                pageHeight = $columnWrapper.children('div').children('div').siblings('.page_number_0').innerHeight();
+                pageHeight = $columnWrapper.children('div').children('div').siblings('.page_number_0').innerHeight() + 'px';
 
             //set menu card's column wrapper height as long as menu card's page height,
             //add active class on visible page.
@@ -72,11 +72,11 @@
             }
 
             //set menu card's page width as long as menu card's column wrapper width,
-            $('.menu_card_page').css('width', $columnWrapper.innerWidth());
-            $columnWrapper.css('height', $('.page_number_0').innerHeight());
+            $('.menu_card_page').css('width', $columnWrapper.innerWidth() + 'px');
+            $columnWrapper.css('height', $('.page_number_0').innerHeight() + 'px');
 
             // store browser window width in variable.
-            var storeFirstWindowSize = $(window).width();
+            var storeFirstWindowSize = $(window).width() + 'px';
             var waitToFinishResize;
 
             //declare a resize function.
@@ -88,78 +88,61 @@
             // when resize is done then this function is going to run.
             function doneResizing(){
 
-                $('.menu_card_page').css('width', $columnWrapper.innerWidth());
+                var currentIndex = $('.active_menu').index();
+                var getCurrentSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
+                var getCureentSlideHeight = $('.active_menu').outerHeight() + 'px';
+                $columnWrapper.css('height', getCureentSlideHeight);
 
-                if( storeFirstWindowSize < $(window).width() ){
-                    var currentIndex = $('.active_menu').index();
-                    var getCurrentSlideWidth = ($columnWrapper.innerWidth() * currentIndex) + 'px';
-                    var getPrevSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
+                console.log("getCureentSlideHeight :", getCureentSlideHeight);
 
+                if($('.active_menu').length){
                     $('.active_menu').css({
                         '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
                         '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
                         '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
                         '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
                     });
-
-                    if($('.active_menu').prev('.menu_card_page').length){
-                        $('.active_menu').prev('.menu_card_page').css({
-                            '-webkit-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
-                            '-moz-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
-                            '-o-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
-                            '-ms-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )'
-                        });
-                    }
-
-                    if($('.active_menu').next('.menu_card_page').length){
-                        $('.active_menu').next('.menu_card_page').css({
-                            '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                            '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                            '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                            '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
-                        });
-                    }
-
-
-                }else if( storeFirstWindowSize > $(window).width()){
-                    var currentIndex = $('.active_menu').index();
-                    var getCurrentSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
-                    var getPrevSlideWidth = ($columnWrapper.innerWidth() * currentIndex) + 'px';
-
-                    $('.active_menu').css({
-                        '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                        '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                        '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                        '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
-                    });
-
-                    if($('.active_menu').next('.menu_card_page').length) {
-                        $('.active_menu').next('.menu_card_page').css({
-                            '-webkit-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                            '-moz-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                            '-o-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )',
-                            '-ms-transform' : 'translate( '+ getCurrentSlideWidth +' , 0 )'
-                        });
-                    }
-
-                    if($('.active_menu').prev('.menu_card_page').length) {
-                        $('.active_menu').prev('.menu_card_page').css({
-                            '-webkit-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
-                            '-moz-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
-                            '-o-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )',
-                            '-ms-transform' : 'translate( '+ getPrevSlideWidth +' , 0 )'
-                        });
-                    }
-
-
                 }
 
+                if($('.active_menu').next('.menu_card_page').length){
+                    var nextIndex = $('.active_menu').next('.menu_card_page').index();
+                    var getNextSlideWidth = ($columnWrapper.innerWidth() * currentIndex) + 'px';
+
+                    $('.active_menu').next('.menu_card_page').css({
+                        '-webkit-transform': 'translate( '+ getNextSlideWidth +' , 0 )',
+                        '-moz-transform': 'translate( '+ getNextSlideWidth +' , 0 )',
+                        '-o-transform': 'translate( '+ getNextSlideWidth +' , 0 )',
+                        '-ms-transform': 'translate( '+ getNextSlideWidth +' , 0 )'
+                    });
+                }
+
+                if($('.active_menu').prev('.menu_card_page').length){
+                    var prevIndex = $('.active_menu').prev('.menu_card_page').index();
+                    var getPrevSlideWidth = -($columnWrapper.innerWidth() * currentIndex) + 'px';
+
+                    $('.active_menu').prev('.menu_card_page').css({
+                        '-webkit-transform': 'translate( '+ getPrevSlideWidth +' , 0 )',
+                        '-moz-transform': 'translate( '+ getPrevSlideWidth +' , 0 )',
+                        '-o-transform': 'translate( '+ getPrevSlideWidth +' , 0 )',
+                        '-ms-transform': 'translate( '+ getPrevSlideWidth +' , 0 )'
+                    });
+                }
+
+                $('.menu_card_page').css('width', $columnWrapper.innerWidth());
+
                 // add condition that on mobile menu card's should be 100% width
-                if($(window).width() < 640)
+                if($(window).width() < 786)
                 {
                     $('.two_column').css('width', '100%');
+                    $('.menu_card_thumbnail').css('display', 'none');
+                    $('.card_menu_list, .menu_card_content').css('width', '100%');
+
+                    $columnWrapper.css('height', $('.active_menu').innerHeight() + 'px');
                 }else{
+                    $columnWrapper.css('height', $('.active_menu').innerHeight() + 'px');
                     $('.two_column').css('width', '45%');
+                    $('.menu_card_content').css('width', '75%');
+                    $('.menu_card_thumbnail').css('display', 'inline-block');
                 }
 
             }
@@ -169,7 +152,7 @@
         ////////////////////////////////////////////////////////////
 
         // declare a function when previous arrow hit.
-        $body.on('click', '.nav_previous', function(){
+        $body.on('click', '.nav_previous span', function(){
 
             var $columnWrapper = $('#column_wrapper');
 
@@ -198,7 +181,7 @@
 
             }
 
-                var pageHeight = $('.active_menu').innerHeight();
+                var pageHeight = $('.active_menu').innerHeight() + 'px';
                 $columnWrapper.css('height', pageHeight);
 
             if($('.active_menu').prev('.menu_card_page').length == 0) $('.nav_previous').hide();
@@ -209,7 +192,7 @@
         ////////////////////////////////////////////////////////////
 
         // declare a function when next arrow hit.
-        $body.on('click', '.nav_next', function(){
+        $body.on('click', '.nav_next span', function(){
 
             var $columnWrapper = $('#column_wrapper');
 
@@ -237,7 +220,7 @@
 
             }
 
-                var pageHeight = $('.active_menu').innerHeight();
+                var pageHeight = $('.active_menu').innerHeight() + 'px';
                 $columnWrapper.css('height', pageHeight);
 
             if($('.active_menu').next('.menu_card_page').length == 0) $('.nav_next').hide();
