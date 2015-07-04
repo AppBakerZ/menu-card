@@ -256,10 +256,10 @@ class Menu_Card_Custom_Post_Base {
     $this->render_template_pre_field($setting_id, $localized_name);
 
     foreach($options as $value => $label) {
-      echo "<label>";
+      echo "<label style='padding-right: 20px'>";
       echo '<input type="radio"' . checked( $saved_value, $value, false ) 
                 . 'name="' . $this->prefix . '[' . $setting_id . ']" value="' . $value . '"/>';
-      echo " $label</label><br>";
+      echo " $label</label>";
     }
 
     $this->render_template_post_field();

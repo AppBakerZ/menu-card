@@ -17,7 +17,9 @@
                             <div class="menu_card_content_wrapper"> <!-- menu content wrapper start from here (class changeable) -->
                                 <% if(menu.post_image.length) { %> <!-- Image Condition start from here -->
                                 <div class="menu_card_thumbnail"> <!-- making class of image thumbnail -->
-                                    <img src="<%= menu.post_image[0] %>" /> <!-- image thumbnail -->
+                                    <a href="<%= menu.guid %>">
+                                        <img src="<%= menu.post_image[0] %>" /> <!-- image thumbnail -->
+                                    </a>
                                 </div>
                                 <% } %> <!-- Image Condition finish here -->
                                 <div class="<%= (menu.post_image.length) ? 'menu_card_content' : 'menu_card_content_full-width' %>"> <!-- menu item text class with full with or quarter width condition start from here -->

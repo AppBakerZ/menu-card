@@ -286,6 +286,7 @@ class Menu_Card_MenuCards_Custom_Post
      **/
     public function render_details_metabox() {
         $this->render_input_field('price', __('Price', 'menu-card'));
+        $this->render_radio_field('link', __('Link', 'menu-card'), array('yes' => 'Yes', 'no' => 'No'));
     }
 
     public function get_posts_by_category_callback() {
@@ -302,7 +303,7 @@ class Menu_Card_MenuCards_Custom_Post
      * @return object $grouped_posts
      */
     public function list_posts_by_term( $posts, $terms, $filter_terms, $count = -1 ) {
-        $grouped_posts = [];
+        $grouped_posts = array();
         $filter = array(
             'orderby' => 'name'
         );
@@ -311,7 +312,7 @@ class Menu_Card_MenuCards_Custom_Post
         }
         $tax_terms = get_terms( $terms, $filter );
         foreach ( $tax_terms as $term ) {
-            $grouped_posts[$term->name] = [];
+            $grouped_posts[$term->name] = array();
 
             $args = array(
                 'posts_per_page' => $count,
