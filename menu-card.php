@@ -7,7 +7,7 @@
  * Plugin Name: Menu Card
  * Plugin URI:  https://wordpress.org/plugins/menu-card/
  * Description: Restaurants Menu Cards
- * Version:     0.2.0
+ * Version:     0.3.0
  * Author:      Furqan Khanzada
  * Author URI:  furqankhanzada.com
  * Text Domain: menu-card-locale
