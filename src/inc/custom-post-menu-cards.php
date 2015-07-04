@@ -15,7 +15,8 @@ class Menu_Card_MenuCards_Custom_Post
     /* Default values of post meta data to be used in metaboxes */
     // TODO: Default values for variables must be initialized
     private static $default_values = array(
-        "price" => "price"
+        "price" => 0,
+        "link" => 'yes'
     );
 
     public function Menu_Card_MenuCards_Custom_Post() {

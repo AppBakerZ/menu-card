@@ -131,6 +131,11 @@ class Menu_Card {
                         array( 'jquery', 'underscore' ),
                         Menu_Card_Info::version );
 
+    wp_register_script( Menu_Card_Info::slug . '-jquery.touchSwipe',
+                        Menu_Card_Info::$plugin_url . '/assets/js/lib/jquery.touchSwipe.min.js',
+                        array( 'jquery' ),
+                        Menu_Card_Info::version );
+
     wp_register_style( Menu_Card_Info::slug . '-plugin-style',
                       Menu_Card_Info::$plugin_url . '/assets/css/public.css',
                       array(),
@@ -152,6 +157,7 @@ class Menu_Card {
    * @since    0.1.0
    */
   public function enqueue_scripts() {
+      wp_enqueue_script(Menu_Card_Info::slug . '-jquery.touchSwipe');
       wp_enqueue_script(Menu_Card_Info::slug . '-plugin-script');
       // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
       wp_localize_script( Menu_Card_Info::slug . '-plugin-script', 'ajax_object',

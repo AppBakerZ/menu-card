@@ -230,5 +230,17 @@
 
         ////////////////////////////////////////////////////////////
 
+        $body.find("#menu-card").swipe( {
+            //Generic swipe handler for all directions
+            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                if(direction == 'left'){
+                    $body.find('.nav_next span').click();
+                }else if(direction == 'right'){
+                    $body.find('.nav_previous span').click();
+                }
+            }
+        });
+
+
 	});
 }(jQuery));
