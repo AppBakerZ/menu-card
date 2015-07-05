@@ -30,5 +30,5 @@ You can set the following values in options page or use the attribute to overrid
 
 == Changelog ==
 
-= 0.5.0 =
+= 0.4.0 =
 Initial version.
