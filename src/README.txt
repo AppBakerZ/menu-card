@@ -1,41 +1,26 @@
 === Menu Card ===
-Contributors: (this should be a list of wordpress.org userids)
-Donate link: http://example.com/
-Tags: comments, spam
+Contributors: furqan-khanzada
+Tags: menu, card, menu card, Restaurants Menu Cards
 Requires at least: 3.0
 Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Restaurants Menu Cards
+Menu Card Lets you build menu card of restaurants, with a shortcode.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Menu Card can manage multiple menus using shortcode. you can also categorized menu by category and can set price also you can toggle link option.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+= How To Use =
 
-A few notes about the sections above:
+Simply place **[menucard]** in your posts/pages for displaying all categories of menu and for specific category use *[menucard category="CATEGORY_SLUG,CATEGORY_SLUG"]*
+You can set the following values in options page or use the attribute to override the values from options page:
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+25	* **price**: A screen name to associate with the Tweet. The provided screen name will be appended to the end of the tweet with the text: "via @username".
+26	* **link**: Suggest accounts related to the your content or intention by comma-separating a list of screen names. After Tweeting, the user will be encouraged to follow these accounts.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
 
 == Installation ==
 

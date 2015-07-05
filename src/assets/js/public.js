@@ -69,6 +69,10 @@
             if(!$columnWrapper.find('div.page_number_0').prev('.menu_card_page').length){
                 $('.nav_previous').hide();
             }
+            //add condition on next arrow .
+            if(!$columnWrapper.find('div.page_number_0').next('.menu_card_page').length){
+                $('.nav_next').hide();
+            }
 
             //set menu card's page width as long as menu card's column wrapper width,
             $('.menu_card_page').css('width', $columnWrapper.innerWidth() + 'px');
