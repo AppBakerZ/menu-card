@@ -11,7 +11,7 @@ Menu Card Lets you build menu card of restaurants, with a shortcode.
 
 == Description ==
 
-Menu Card can manage multiple menus using shortcode. you can also categorized menu by category and can set price also you can toggle link option.
+Menu Card can manage multiple menus using shortcode. you can also categorised menu by category and can set price also you can toggle link option.
 
 = How To Use =
 
