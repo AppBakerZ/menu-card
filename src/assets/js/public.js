@@ -54,20 +54,19 @@
             //console.log(posts[0]);
 
             ///////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////
 
             //get menu card's column wrapper,
             //set first page on front screen
             var $columnWrapper = $('#column_wrapper'),
-                pageHeight = $columnWrapper.children('div').children('div').siblings('.page_number_0').innerHeight() + 'px';
+                pageHeight = $columnWrapper.find('div.page_number_0').innerHeight() + 'px';
 
             //set menu card's column wrapper height as long as menu card's page height,
             //add active class on visible page.
             $columnWrapper.css('height', pageHeight);
-            $columnWrapper.children('div').children('div').siblings('.page_number_0').addClass("active_menu").show();
+            $columnWrapper.find('div.page_number_0').addClass("active_menu").show();
 
             //add condition on previous arrow .
-            if(!$columnWrapper.children('div').children('div').siblings('.page_number_0').prev('.menu_card_page').length){
+            if(!$columnWrapper.find('div.page_number_0').prev('.menu_card_page').length){
                 $('.nav_previous').hide();
             }
 
