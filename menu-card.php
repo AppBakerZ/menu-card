@@ -6,7 +6,7 @@
  * @wordpress-plugin
  * Plugin Name: Menu Card
  * Plugin URI:  https://wordpress.org/plugins/menu-card/
- * Description: Restaurants Menu Cards
+ * Description: Menu Card Lets you build menu card of restaurants, with a shortcode.
  * Version:     0.4.0
  * Author:      Furqan Khanzada
  * Author URI:  furqankhanzada.com
