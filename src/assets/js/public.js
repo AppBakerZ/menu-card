@@ -36,10 +36,11 @@
             var count = 1;
             var index = 0;
             var data = [];
-            _.each(posts[0], function(cat, key){
-                var obj = {};
-                obj[key] = cat;
-                data[index] ? data[index].push(obj) : (data[index] = [obj]);
+            console.log(posts[0]);
+            _.each(posts[0], function(section){
+                //var obj = {};
+                //obj[key] = cat;
+                data[index] ? data[index].push(section) : (data[index] = [section]);
                 //move to next after adding 2 categories to each column
                 if(count % 2 == 0){
                     index++;
@@ -47,7 +48,7 @@
                 count++
             });
 
-            //console.log('data :', data);
+            console.log('data :', data);
             var result = _.template(template[0], {columns: data});
             $container.append(result);
 

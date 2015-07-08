@@ -119,7 +119,7 @@ class Menu_Card_MenuCards_Custom_Post
             /* (array/boolean) (optional) An alias for calling add_post_type_support() directly.
                As of 3.5, boolean false can be passed as value instead of an array to prevent default (title and editor) behaviour.
                Default: title and editor */
-            'supports' => array('title', 'editor', 'thumbnail')
+            'supports' => array('title', 'editor', 'excerpt', 'thumbnail')
         );
 
         //Register Post type
@@ -313,8 +313,6 @@ class Menu_Card_MenuCards_Custom_Post
         }
         $tax_terms = get_terms( $terms, $filter );
         foreach ( $tax_terms as $term ) {
-            $grouped_posts[$term->name] = array();
-
             $args = array(
                 'posts_per_page' => $count,
                 $terms => $term->slug,
@@ -324,8 +322,15 @@ class Menu_Card_MenuCards_Custom_Post
             foreach ( $tax_terms_posts as $post ) {
                 $post->post_meta = get_post_meta($post->ID, $this->prefix);
                 $post->post_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-                $grouped_posts[$term->name][] = $post;
+                //$grouped_posts[$term->name][] = $post;
             }
+
+            $grouped_posts[] = array(
+                'name' => $term->name,
+                'description' => $term->description,
+                'posts' => $tax_terms_posts
+            );
+
         }
         return $grouped_posts;
     }
