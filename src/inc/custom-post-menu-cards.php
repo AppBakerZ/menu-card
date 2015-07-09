@@ -16,7 +16,8 @@ class Menu_Card_MenuCards_Custom_Post
     // TODO: Default values for variables must be initialized
     private static $default_values = array(
         "price" => 0,
-        "link" => 'yes'
+        "link" => 'yes',
+        "custom_url" => ''
     );
 
     public function Menu_Card_MenuCards_Custom_Post() {
@@ -287,7 +288,8 @@ class Menu_Card_MenuCards_Custom_Post
      **/
     public function render_details_metabox() {
         $this->render_input_field('price', __('Price', 'menu-card'));
-        $this->render_radio_field('link', __('Link', 'menu-card'), array('yes' => 'Yes', 'no' => 'No'));
+        $this->render_radio_field('link', __('Link', 'menu-card'), array('yes' => 'Linked with post', 'no' => 'No Link', 'custom_url' => 'Custom Url (use below field for url)'));
+        $this->render_input_field('custom_url', __('Custom Url', 'menu-card'));
     }
 
     public function get_posts_by_category_callback() {
@@ -320,7 +322,7 @@ class Menu_Card_MenuCards_Custom_Post
             );
             $tax_terms_posts = get_posts( $args );
             foreach ( $tax_terms_posts as $post ) {
-                $post->post_meta = get_post_meta($post->ID, $this->prefix);
+                $post->post_meta = get_post_meta($post->ID, $this->prefix)[0];
                 $post->post_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
                 //$grouped_posts[$term->name][] = $post;
             }

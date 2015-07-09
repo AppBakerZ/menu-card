@@ -28,7 +28,7 @@
         var getTemplate = jQuery.get(ajax_object.template_url),
             getPosts = jQuery.post(ajax_object.ajax_url, data);
 
-        $.when(getTemplate, getPosts).done(function(template, posts){
+        $.when(getTemplate, getPosts).done(function(template, sections){
             // the code here will be executed when all 2 ajax requests resolve.
             // status, and jqXHR object for each of the 2 ajax calls respectively.
             //var columns = posts[0]
@@ -36,10 +36,23 @@
             var count = 1;
             var index = 0;
             var data = [];
-            console.log(posts[0]);
-            _.each(posts[0], function(section){
-                //var obj = {};
-                //obj[key] = cat;
+            // Make columns
+            _.each(sections[0], function(section){
+                //Make condition less
+                _.each(section.posts, function(post){
+                    // Setting up link options here
+                    var link;
+                    switch (post.post_meta.link){
+                        case 'yes':
+                            link = post.guid;
+                            break;
+                        case 'custom_url':
+                            link = post.post_meta.custom_url;
+                            break;
+                    }
+                    post.link = link;
+                });
+
                 data[index] ? data[index].push(section) : (data[index] = [section]);
                 //move to next after adding 2 categories to each column
                 if(count % 2 == 0){
@@ -48,11 +61,8 @@
                 count++
             });
 
-            console.log('data :', data);
             var result = _.template(template[0], {columns: data});
             $container.append(result);
-
-            //console.log(posts[0]);
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,8 +106,6 @@
                 var getCurrentSlideWidth = - ($columnWrapper.innerWidth() * currentIndex) + 'px';
                 var getCureentSlideHeight = $('.active_menu').outerHeight() + 'px';
                 $columnWrapper.css('height', getCureentSlideHeight);
-
-                console.log("getCureentSlideHeight :", getCureentSlideHeight);
 
                 if($('.active_menu').length){
                     $('.active_menu').css({

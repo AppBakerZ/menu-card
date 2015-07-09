@@ -31,8 +31,8 @@
                                 <% if(menu.post_image.length) { %>
                                 <!-- Image Condition start from here -->
                                 <div class="menu_card_thumbnail">
-                                    <% if(menu.post_meta[0].link == 'yes') { %>
-                                    <a href="<%= menu.guid %>">
+                                    <% if(menu.link) { %>
+                                    <a href="<%= menu.link %>">
                                         <img src="<%= menu.post_image[0] %>" />
                                     </a>
                                     <% } else {%>
@@ -42,11 +42,11 @@
                                 <% } %>
                                 <!-- Image Condition finish here -->
                                 <div class="<%= (menu.post_image.length) ? 'menu_card_content' : 'menu_card_content_full-width' %>"> <!-- menu item text class with full with or quarter width condition start from here -->
-                                    <% if(menu.post_title || menu.post_meta[0].price) { %>
+                                    <% if(menu.post_title || menu.post_meta.price) { %>
                                     <div class="title_price_box">
                                         <div class="menu_card_title">
-                                            <% if(menu.post_meta[0].link == 'yes') { %>
-                                            <a href="<%= menu.guid %>">
+                                            <% if(menu.link) { %>
+                                            <a href="<%= menu.link %>">
                                                 <h2>
                                                     <%= menu.post_title %>
                                                 </h2>
@@ -58,10 +58,10 @@
                                             <% } %>
                                         </div>
                                         <!-- menu card title -->
-                                        <% if(menu.post_meta[0].price.length) { %>
+                                        <% if(menu.post_meta.price.length) { %>
                                         <!-- get price condition if price is present start from here -->
                                         <span class="menu_card_price">
-                                            <%= menu.post_meta[0].price %>
+                                            <%= menu.post_meta.price %>
                                         </span>
                                         <% } %>
                                     </div>
