@@ -38,9 +38,6 @@ You can set the following values in options page or use the attribute to overrid
 
 == Changelog ==
 
-= 0.8.0 =
-Issue resolved that happened after upgrading to latest version due to underscore.js update.
-
 = 0.7.0 =
 Fixed edit menu category issue. This is major change you will lost all previous categories.
 

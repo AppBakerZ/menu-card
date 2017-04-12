@@ -61,8 +61,8 @@
                 count++
             });
 
-            var result = _.template(template[0], {columns: data});
-            $container.append(result);
+            var compiled = _.template(template[0]);
+            $container.append(compiled({columns: data}));
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
